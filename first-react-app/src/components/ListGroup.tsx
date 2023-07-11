@@ -1,8 +1,13 @@
 // import { MouseEvent } from "react";
 import { useState } from "react";
 
-function ListGroup() {
-  let items = ["Hello", "this is the 2nd line", "this is 3rd"];
+interface Props {
+  items: string[];
+  heading: string;
+  onSelectItem: (item: string) => void;
+}
+
+function ListGroup({ items, heading, onSelectItem }: Props) {
   //   let selectedIndex = -1;
 
   //(State) Hook; tells that our vaiable would change with time
@@ -20,7 +25,7 @@ function ListGroup() {
 
   return (
     <>
-      <h1>List</h1>
+      <h1>{heading}</h1>
       {items.length == 0 && <p>No item found</p>}
       <ul className="list-group">
         {items.map((item, index) => (
@@ -33,6 +38,7 @@ function ListGroup() {
             key={item}
             onClick={() => {
               setSelectedIndex(index);
+              onSelectItem(item);
             }}
           >
             {item}
